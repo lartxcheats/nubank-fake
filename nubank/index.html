@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="">
+    <meta name="theme-color" content="#820AD1">
+    <link rel="manifest" href="./manifest.json">
+    <link rel="apple-touch-icon" href="./nubank-icon.png">
+    <title></title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Modal de boas-vindas -->
+    <div id="welcomeModal" class="welcome-modal">
+        <div class="welcome-content">
+            <div class="welcome-icon">📸</div>
+            <h2>By @guhhh_44</h2>
+            <p>Siga no Instagram para usar o app!</p>
+            <a href="https://www.instagram.com/guhhh_44?igsh=d3FzMmRkbDM3eTRo&utm_source=qr" target="_blank" rel="noopener noreferrer" class="welcome-button" id="followButton">
+                Seguir @guhhh_44
+            </a>
+        </div>
+    </div>
+
+    <!-- Partículas de fundo -->
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>Nubank</h1>
+            <p>Suas transferências</p>
+        </header>
+
+        <div class="notification-area" id="notificationArea">
+            <p class="empty-state">Nenhuma notificação ainda</p>
+        </div>
+
+        <div class="notification-controls">
+            <button id="enableNotifications" class="btn-primary">🔔 Ativar Notificações</button>
+            <button id="installApp" class="btn-secondary" style="display:none;">📱 Instalar App</button>
+        </div>
+
+        <div class="form-section">
+            <h2>🎯 Modo Manual</h2>
+            <p class="section-description">Envie notificações instantâneas com nome de pessoa física. Ideal para simular transferências de amigos ou familiares.</p>
+            <form id="comprovanteForm">
+                <label>
+                    Valor (qualquer valor):
+                    <input type="number" id="valorManual" placeholder="Ex: 19.90" step="0.01" value="19.90" min="0.01" required>
+                </label>
+                <label>
+                    Nome do remetente (opcional):
+                    <input type="text" id="nomeManual" placeholder="Deixe vazio para nome aleatório">
+                </label>
+                <label>
+                    Quantas notificações:
+                    <input type="number" id="quantidadeManual" value="1" min="1" max="1000" required>
+                </label>
+                <div class="button-group">
+                    <button type="submit" class="btn-manual">▶️ Iniciar Manual</button>
+                    <button type="button" id="stopManual" class="btn-danger" style="display:none;">⏹️ Parar</button>
+                </div>
+                <div id="statusManual" class="status-box" style="display:none;"></div>
+            </form>
+        </div>
+
+        <div class="auto-notification-section">
+            <h2>⚡ Modo Automático</h2>
+            <p class="section-description">Notificações contínuas com intervalo programado. Envia automaticamente durante o tempo configurado com nomes aleatórios.</p>
+            <div class="controls">
+                <label>
+                    Valor (qualquer valor):
+                    <input type="number" id="valorAuto" placeholder="Ex: 19.90" step="0.01" value="19.90" min="0.01">
+                </label>
+                <label>
+                    Quantas notificações:
+                    <input type="number" id="quantidadeNotif" value="10" min="1" max="1000">
+                </label>
+                <label>
+                    Intervalo (segundos):
+                    <input type="number" id="intervaloSegundos" value="5" min="1" max="60">
+                </label>
+                <label>
+                    Durante quanto tempo (minutos):
+                    <input type="number" id="duracaoMinutos" value="5" min="1" max="120">
+                </label>
+                <div class="button-group">
+                    <button id="startAuto" class="btn-success">▶️ Iniciar Automático</button>
+                    <button id="stopAuto" class="btn-danger" style="display:none;">⏹️ Parar</button>
+                </div>
+                <div id="statusNotif" class="status-box" style="display:none;"></div>
+            </div>
+        </div>
+
+        <div class="empresa-notification-section">
+            <h2>🏢 Modo Empresas</h2>
+            <p class="section-description">Notificações com nomes de empresas genéricas (Ltda). Perfeito para simular pagamentos corporativos.</p>
+            <form id="empresaForm">
+                <label>
+                    Valor (qualquer valor):
+                    <input type="number" id="valorEmpresa" placeholder="Ex: 19.90" step="0.01" value="19.90" min="0.01" required>
+                </label>
+                <label>
+                    Nome da empresa (opcional):
+                    <input type="text" id="nomeEmpresa" placeholder="Deixe vazio para empresa aleatória">
+                </label>
+                <label>
+                    Quantas notificações:
+                    <input type="number" id="quantidadeEmpresa" value="1" min="1" max="1000" required>
+                </label>
+                <div class="button-group">
+                    <button type="submit" class="btn-empresa">▶️ Iniciar Empresas</button>
+                    <button type="button" id="stopEmpresa" class="btn-danger" style="display:none;">⏹️ Parar</button>
+                </div>
+                <div id="statusEmpresa" class="status-box" style="display:none;"></div>
+            </form>
+        </div>
+
+        <div class="comprovantes-list">
+            <h2>Histórico de Notificações</h2>
+            <div id="comprovantesList"></div>
+        </div>
+
+        <footer class="footer">
+            <a href="https://www.instagram.com/guhhh_44?igsh=d3FzMmRkbDM3eTRo&utm_source=qr" target="_blank" rel="noopener noreferrer" class="instagram-link">
+                Feito por @guhhh_44
+            </a>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
